@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LegacyHelper</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_new_legacy">New Legacy</string>
+    <string name="legacy_name">Legacy Name</string>
+    <string name="gender_law">Gender Law</string>
+    <string name="createLegacy">Create Legacy</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_new_legacy">New Legacy</string>
+    <string name="bloodline_law">Bloodline Law</string>
+    <string name="heir_law">Heir Law</string>
+    <string-array name="gender_law_array">
+        <item>Select Gender Law</item>
+        <item>Strict Matriarchal</item>
+        <item>Matriarchal</item>
+        <item>Strict Patriarchal</item>
+        <item>Patriarchal</item>
+        <item>Strict Equality</item>
+        <item>Equality</item>
+    </string-array>
+    <string-array name="bloodline_law_array">
+        <item>Select Bloodline Law</item>
+        <item>Strict Traditional</item>
+        <item>Traditional</item>
+        <item>Modern</item>
+        <item>Foster</item>
+        <item>Strict Foster</item>
+    </string-array>
+    <string-array name="heir_law_array">
+        <item>Select Heir Law</item>
+        <item>First Born</item>
+        <item>Last Born</item>
+        <item>Living Will</item>
+        <item>Merit</item>
+        <item>Strength</item>
+        <item>Random</item>
+        <item>Exemplar</item>
+    </string-array>
+</resources>
