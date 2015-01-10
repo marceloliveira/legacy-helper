@@ -43,4 +43,13 @@
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
         android:text="Heir Law" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/legacyListItemExemplarTrait"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:text="Exemplar Trait" />
+
 </LinearLayout>
