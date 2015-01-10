@@ -18,10 +18,12 @@ import android.widget.SimpleCursorAdapter;
 
 import org.attalaya.legacyhelper.LegacyHelperContract.Legacy;
 
+import java.util.Arrays;
+
 public class LegacyListFragment extends Fragment {
 
     protected SimpleCursorAdapter mAdapter;
-    private static final String[] LEGACY_FIELDS = new String[]{Legacy._ID, Legacy.COLUMN_NAME_NAME, Legacy.COLUMN_NAME_GENDER_LAW, Legacy.COLUMN_NAME_BLOODLINE_LAW, Legacy.COLUMN_NAME_HEIR_LAW, Legacy.COLUMN_NAME_EXEMPLAR_TRAIT};
+    private static final String[] LEGACY_FIELDS = new String[]{Legacy._ID, Legacy.COLUMN_NAME_NAME, Legacy.COLUMN_NAME_GENDER_LAW, Legacy.COLUMN_NAME_BLOODLINE_LAW, Legacy.COLUMN_NAME_HEIR_LAW};
 
     public LegacyListFragment() {
     }
@@ -38,7 +40,7 @@ public class LegacyListFragment extends Fragment {
 
             }
         });
-        mAdapter = new SimpleCursorAdapter(getActivity(),R.layout.list_item_legacy,null,LEGACY_FIELDS,new int[]{android.R.id.empty,R.id.legacyListItemName,R.id.legacyListItemGenderLaw,R.id.legacyListItemBloodlineLaw,R.id.legacyListItemHeirLaw,R.id.legacyListItemExemplarTrait},0);
+        mAdapter = new SimpleCursorAdapter(getActivity(),R.layout.list_item_legacy,null,LEGACY_FIELDS,new int[]{android.R.id.empty,R.id.legacyListItemName,R.id.legacyListItemGenderLaw,R.id.legacyListItemBloodlineLaw,R.id.legacyListItemHeirLaw},0);
         LegacyLoaderTask task = new LegacyLoaderTask();
         task.execute();
         legacys.setAdapter(mAdapter);
@@ -63,7 +65,9 @@ public class LegacyListFragment extends Fragment {
         @Override
         protected Cursor doInBackground(Void... params) {
             MatrixCursor cursor = new MatrixCursor(LEGACY_FIELDS);
-            Cursor mCursor = getActivity().getContentResolver().query(Legacy.CONTENT_URI,LEGACY_FIELDS,null,null,null);
+            String[] queryFields = Arrays.copyOf(LEGACY_FIELDS,LEGACY_FIELDS.length+1);
+            queryFields[queryFields.length-1] = Legacy.COLUMN_NAME_EXEMPLAR_TRAIT;
+            Cursor mCursor = getActivity().getContentResolver().query(Legacy.CONTENT_URI, queryFields, null, null, null);
             Resources res = getActivity().getApplicationContext().getResources();
             String[] genderlaws = res.getStringArray(R.array.gender_law_array);
             String[] bloodlinelaws = res.getStringArray(R.array.bloodline_law_array);
@@ -72,7 +76,16 @@ public class LegacyListFragment extends Fragment {
             if (mCursor.getCount()>0) {
                 mCursor.moveToFirst();
                 while (!mCursor.isAfterLast()) {
-                    cursor.addRow(new Object[]{mCursor.getInt(0),mCursor.getString(1),genderlaws[mCursor.getInt(2)],bloodlinelaws[mCursor.getInt(3)],heirlaws[mCursor.getInt(4)],mCursor.getInt(5)==-1?"":traits[mCursor.getInt(5)]});
+                    int legacyId = mCursor.getInt(0);
+                    String legacyName = mCursor.getString(1);
+                    String genderlaw = genderlaws[mCursor.getInt(2)];
+                    String bloodlinelaw = bloodlinelaws[mCursor.getInt(3)];
+                    String heirlaw = heirlaws[mCursor.getInt(4)];
+                    if (mCursor.getInt(4) == 7) {
+                        String exemplarTrait = mCursor.getInt(5) != -1 ? traits[mCursor.getInt(5)] : "";
+                        heirlaw += " - "+exemplarTrait;
+                    }
+                    cursor.addRow(new Object[]{legacyId, legacyName, genderlaw, bloodlinelaw, heirlaw});
                     mCursor.moveToNext();
                 }
             }
