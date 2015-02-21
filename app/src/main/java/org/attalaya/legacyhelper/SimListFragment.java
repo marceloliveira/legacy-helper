@@ -1,7 +1,5 @@
 package org.attalaya.legacyhelper;
 
-import android.annotation.TargetApi;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -10,6 +8,7 @@ import android.graphics.Outline;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,36 +21,41 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import org.attalaya.legacyhelper.LegacyHelperContract.Legacy;
+import org.attalaya.legacyhelper.LegacyHelperContract.Sim;
 
-import java.util.Arrays;
-
-public class LegacyListFragment extends Fragment {
+public class SimListFragment extends Fragment {
 
     protected ActionMode mActionMode;
     protected SimpleCursorAdapter mAdapter;
-    protected ListView legacys;
-    private static final String[] LEGACY_FIELDS = new String[]{Legacy._ID, Legacy.COLUMN_NAME_NAME, Legacy.COLUMN_NAME_GENDER_LAW, Legacy.COLUMN_NAME_BLOODLINE_LAW, Legacy.COLUMN_NAME_HEIR_LAW};
+    protected ListView sims;
+    protected long legacyId;
+    private static final String[] SIM_FIELDS = new String[]{Sim._ID, Sim.COLUMN_NAME_TYPE, Sim.COLUMN_NAME_NAME, Sim.COLUMN_NAME_GENERATION, Sim.COLUMN_NAME_GENDER};
 
-    public LegacyListFragment() {
+    public SimListFragment() {
+    }
+
+    public static SimListFragment newInstance(long legacyId) {
+        SimListFragment f = new SimListFragment();
+        f.legacyId = legacyId;
+        return f;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_legacy_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_sim_list, container, false);
         setHasOptionsMenu(true);
-        legacys = (ListView)rootView.findViewById(R.id.legacys);
-        legacys.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        legacys.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        sims = (ListView)rootView.findViewById(R.id.sims);
+        sims.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        sims.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(parent.getContext(), LegacyActivity.class);
-                intent.putExtra(Legacy._ID, id);
+                intent.putExtra(Sim._ID, id);
                 startActivity(intent);
             }
         });
-        legacys.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        sims.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mActionMode != null) {
@@ -66,14 +70,13 @@ public class LegacyListFragment extends Fragment {
                 return true;
             }
         });
-        mAdapter = new SimpleCursorAdapter(getActivity(),R.layout.list_item_legacy,null,LEGACY_FIELDS,new int[]{android.R.id.empty,R.id.legacyListItemName,R.id.legacyListItemGenderLaw,R.id.legacyListItemBloodlineLaw,R.id.legacyListItemHeirLaw},0);
-        LegacyLoaderTask task = new LegacyLoaderTask();
+        mAdapter = new SimpleCursorAdapter(getActivity(),R.layout.list_item_sim,null,SIM_FIELDS,new int[]{android.R.id.empty,R.id.simListItemType,R.id.simListItemName,R.id.simListItemGeneration,R.id.simListItemGender},0);
+        SimLoaderTask task = new SimLoaderTask();
         task.execute();
-        legacys.setAdapter(mAdapter);
+        sims.setAdapter(mAdapter);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View addButton = rootView.findViewById(R.id.add_button);
             addButton.setOutlineProvider(new ViewOutlineProvider() {
-                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void getOutline(View view, Outline outline) {
                     int diameter = getResources().getDimensionPixelSize(R.dimen.floating_action_button_diameter);
@@ -84,7 +87,7 @@ public class LegacyListFragment extends Fragment {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    newLegacy();
+                    createSim();
                 }
             });
         }
@@ -94,7 +97,7 @@ public class LegacyListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        LegacyLoaderTask task = new LegacyLoaderTask();
+        SimLoaderTask task = new SimLoaderTask();
         task.execute();
     }
 
@@ -104,13 +107,6 @@ public class LegacyListFragment extends Fragment {
         MenuItem newLegacy = menu.findItem(R.id.action_new_legacy);
         if (newLegacy!=null) {
             newLegacy.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            newLegacy.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    newLegacy();
-                    return true;
-                }
-            });
         }
     }
 
@@ -132,7 +128,7 @@ public class LegacyListFragment extends Fragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_edit_legacy:
-                    editLegacy();
+                    createSim();
                     mode.finish(); // Action picked, so close the CAB
                     return true;
                 default:
@@ -142,47 +138,34 @@ public class LegacyListFragment extends Fragment {
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            legacys.setItemChecked(-1,true);
+            sims.setItemChecked(-1, true);
             mActionMode = null;
         }
     };
 
-    private void editLegacy() {
-        getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("edit")).addToBackStack(null).commit();
+    private void createSim() {
+        getFragmentManager().beginTransaction().replace(R.id.container, CreateSimFragment.newInstance("")).addToBackStack(null).commit();
         getFragmentManager().executePendingTransactions();
     }
 
-    public void newLegacy() {
-        getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("new")).addToBackStack(null).commit();
-        getFragmentManager().executePendingTransactions();
-    }
-
-    protected class LegacyLoaderTask extends AsyncTask<Void, Void, Cursor> {
+    protected class SimLoaderTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
         protected Cursor doInBackground(Void... params) {
-            MatrixCursor cursor = new MatrixCursor(LEGACY_FIELDS);
-            String[] queryFields = Arrays.copyOf(LEGACY_FIELDS,LEGACY_FIELDS.length+1);
-            queryFields[queryFields.length-1] = Legacy.COLUMN_NAME_EXEMPLAR_TRAIT;
-            Cursor mCursor = getActivity().getContentResolver().query(Legacy.CONTENT_URI, queryFields, null, null, null);
+            String[] simFields = new String[]{Sim._ID, Sim.COLUMN_NAME_TYPE, Sim.COLUMN_NAME_NAME, Sim.COLUMN_NAME_SURNAME, Sim.COLUMN_NAME_GENERATION, Sim.COLUMN_NAME_GENDER};
+            MatrixCursor cursor = new MatrixCursor(simFields);
+            Cursor mCursor = getActivity().getContentResolver().query(Sim.CONTENT_URI, null, null, null, null);
             Resources res = getActivity().getApplicationContext().getResources();
-            String[] genderlaws = res.getStringArray(R.array.gender_law_array);
-            String[] bloodlinelaws = res.getStringArray(R.array.bloodline_law_array);
-            String[] heirlaws = res.getStringArray(R.array.heir_law_array);
-            String[] traits = res.getStringArray(R.array.m_trait_array);
+            String[] types = res.getStringArray(R.array.sim_type_array);
             if (mCursor.getCount()>0) {
                 mCursor.moveToFirst();
                 while (!mCursor.isAfterLast()) {
-                    int legacyId = mCursor.getInt(0);
-                    String legacyName = mCursor.getString(1);
-                    String genderlaw = genderlaws[mCursor.getInt(2)];
-                    String bloodlinelaw = bloodlinelaws[mCursor.getInt(3)];
-                    String heirlaw = heirlaws[mCursor.getInt(4)];
-                    if (mCursor.getInt(4) == 7) {
-                        String exemplarTrait = mCursor.getInt(5) != -1 ? traits[mCursor.getInt(5)] : "";
-                        heirlaw += " - "+exemplarTrait;
-                    }
-                    cursor.addRow(new Object[]{legacyId, legacyName, genderlaw, bloodlinelaw, heirlaw});
+                    int simId = mCursor.getInt(0);
+                    String simType = types[Integer.parseInt(mCursor.getString(1))];
+                    String simName = mCursor.getString(2)+" "+mCursor.getString(3);
+                    String simGeneration = "Generation "+mCursor.getString(4);
+                    String simGender = mCursor.getString(5);
+                    cursor.addRow(new Object[]{simId, simType, simName, simGeneration, simGender});
                     mCursor.moveToNext();
                 }
             }

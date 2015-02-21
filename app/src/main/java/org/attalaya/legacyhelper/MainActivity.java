@@ -1,19 +1,18 @@
 package org.attalaya.legacyhelper;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getFragmentManager().beginTransaction().add(R.id.container, new LegacyListFragment()).commit();
-
     }
 
     @Override
@@ -37,7 +36,7 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void openNewLegacy() {
+    public void openNewLegacy() {
         getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("new")).addToBackStack(null).commit();
         getFragmentManager().executePendingTransactions();
     }

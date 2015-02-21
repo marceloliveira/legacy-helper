@@ -1,41 +1,35 @@
 package org.attalaya.legacyhelper;
 
-import android.app.Fragment;
-import android.content.ContentValues;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import org.attalaya.legacyhelper.LegacyHelperContract.Legacy;
 
 
-public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class CreateSimFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private int genderLaw = 0,bloodlineLaw = 0,heirLaw = 0,exemplarTrait=-1;
-    private EditText legacyName;
-    private Spinner genderLawSpinner, bloodlineLawSpinner, heirLawSpinner, exemplarTraitSpinner;
-    private Button createLegacyButton, cancelButton;
+    private int simType, simSex, simAge;
+    private EditText simName, simSurname;
+    private Spinner simTypeSpinner, simSexSpinner, simAgeSpinner;
 
     private static final String ARG_ACTION = "action";
 
     private String mAction;
 
-    public static EditLegacyFragment newInstance(String action) {
-        EditLegacyFragment fragment = new EditLegacyFragment();
+    public static CreateSimFragment newInstance(String action) {
+        CreateSimFragment fragment = new CreateSimFragment();
         Bundle args = new Bundle();
         args.putString(ARG_ACTION, action);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public EditLegacyFragment() {
+    public CreateSimFragment() {
     }
 
     @Override
@@ -49,15 +43,26 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_legacy, container, false);
-        legacyName = (EditText) rootView.findViewById(R.id.legacyNameText);
-        genderLawSpinner = (Spinner) rootView.findViewById(R.id.genderLawSpinner);
-        final ArrayAdapter<CharSequence> genderLawAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.gender_law_array, android.R.layout.simple_spinner_item);
-        genderLawAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderLawSpinner.setAdapter(genderLawAdapter);
-        genderLawSpinner.setOnItemSelectedListener(this);
-        bloodlineLawSpinner = (Spinner) rootView.findViewById(R.id.bloodlineLawSpinner);
+        View rootView = inflater.inflate(R.layout.fragment_create_sim, container, false);
+        simTypeSpinner = (Spinner) rootView.findViewById(R.id.simTypeSpinner);
+        final ArrayAdapter<CharSequence> simTypeAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.sim_type_array, android.R.layout.simple_spinner_item);
+        simTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        simTypeSpinner.setAdapter(simTypeAdapter);
+        simTypeSpinner.setOnItemSelectedListener(this);
+        simSexSpinner = (Spinner) rootView.findViewById(R.id.sexSpinner);
+        final ArrayAdapter<CharSequence> simSexAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.sim_sex_array, android.R.layout.simple_spinner_item);
+        simSexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        simSexSpinner.setAdapter(simSexAdapter);
+        simSexSpinner.setOnItemSelectedListener(this);
+        simAgeSpinner = (Spinner) rootView.findViewById(R.id.ageSpinner);
+        final ArrayAdapter<CharSequence> simAgeAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.sim_age_array, android.R.layout.simple_spinner_item);
+        simAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        simAgeSpinner.setAdapter(simAgeAdapter);
+        simAgeSpinner.setOnItemSelectedListener(this);
+        /*bloodlineLawSpinner = (Spinner) rootView.findViewById(R.id.bloodlineLawSpinner);
         ArrayAdapter<CharSequence> bloodlineLawAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.bloodline_law_array, android.R.layout.simple_spinner_item);
         bloodlineLawAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -90,7 +95,7 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
                 newLegacyValues.put(Legacy.COLUMN_NAME_EXEMPLAR_TRAIT,exemplarTrait);
 
                 if (mAction.equals("new")) {
-                    getActivity().getContentResolver().insert(LegacyHelperContract.Legacy.CONTENT_URI, newLegacyValues);
+                    getActivity().getContentResolver().insert(Legacy.CONTENT_URI, newLegacyValues);
                 }
 
                 getFragmentManager().popBackStack();
@@ -102,29 +107,14 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
             }
-        });
+        });*/
         return rootView;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
-            case R.id.genderLawSpinner: genderLaw = position; break;
-            case R.id.bloodlineLawSpinner: bloodlineLaw = position; break;
-            case R.id.heirLawSpinner:
-                heirLaw = position;
-                if (heirLaw == 7) {
-                    ((View)exemplarTraitSpinner.getParent()).setVisibility(View.VISIBLE);
-                    ArrayAdapter<CharSequence> exemplarTraitAdapter = ArrayAdapter.createFromResource(getActivity(),
-                            R.array.m_trait_array, android.R.layout.simple_spinner_item);
-                    exemplarTraitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    exemplarTraitSpinner.setAdapter(exemplarTraitAdapter);
-                    exemplarTraitSpinner.setOnItemSelectedListener(this);
-                } else {
-                    ((View)exemplarTraitSpinner.getParent()).setVisibility(View.GONE);
-                }
-                break;
-            case R.id.exemplarTraitSpinner: exemplarTrait = position; break;
+            case R.id.simTypeSpinner: simType = position; break;
         }
     }
 

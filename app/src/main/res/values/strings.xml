@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- General -->
     <string name="app_name">LegacyHelper</string>
     <string name="action_settings">Settings</string>
     <string name="action_new_legacy">New Legacy</string>
     <string name="legacy_name">Legacy Name</string>
-    <string name="createLegacy">Create Legacy</string>
-    <string name="editLegacy">Edit Legacy</string>
+    <string name="create_legacy">Create Legacy</string>
+    <string name="edit_legacy">Edit Legacy</string>
+    <string name="delete_legacy">Delete Legacy</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_new_legacy">New Legacy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_section_sims">Sims</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <!-- Sims -->
+    <string name="founder">Founder</string>
+    <string name="primary_spouse">Primary Spouse</string>
+    <string name="blood_relative">Blood Relative</string>
+    <string name="spouse">Spouse</string>
     <!-- Laws -->
     <string name="select_all_laws">Select all the three laws</string>
     <string name="gender_law">Gender Law</string>
@@ -188,7 +201,7 @@
     <string name="f_popularity_party_animal_aspiration">Popularity: Party Animal</string>
     <string name="m_social_social_butterfly_aspiration">Social: Social Butterfly</string>
     <string name="f_social_social_butterfly_aspiration">Social: Social Butterfly</string>
-    <!-- Death Methods-->
+    <!-- Death Methods -->
     <string name="cardiac_explosion_death">Cardiac Explosion</string>
     <string name="cowplant_death">Cowplant</string>
     <string name="drowning_death">Drowning</string>
@@ -539,4 +552,19 @@
     <string name="f_writer_journalist_9_career_path">Editor-In-Chief</string>
     <string name="m_writer_journalist_10_career_path">Scribe of History</string>
     <string name="f_writer_journalist_10_career_path">Scribe of History</string>
+    <string name="title_activity_legacy">Legacy Overview</string>
+    <string name="sim_type">Type</string>
+    <string name="sim_name">Name</string>
+    <string name="sim_traits">Traits</string>
+    <string name="sim_sex">Sex</string>
+    <string name="sim_aspiration">Aspiration</string>
+    <string name="sim_age">Age</string>
+    <string name="natural_child">Natural-born Child</string>
+    <string name="adopted_child">Adopted Child</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="young_adult">Young Adult</string>
+    <string name="adult">Adult</string>
+    <string name="elder">Elder</string>
+
 </resources>

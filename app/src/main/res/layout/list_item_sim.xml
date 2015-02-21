@@ -5,41 +5,41 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:minHeight="?android:attr/listPreferredItemHeightLarge"
-    android:backgroundTint="@color/list_item">
+    android:background="@color/list_item">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemName"
+        android:id="@+id/simListItemType"
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:gravity="center_vertical"
         android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Legacy Name"/>
+        android:text="Type"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemGenderLaw"
+        android:id="@+id/simListItemName"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Gender Law" />
+        android:text="Sim Name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemBloodlineLaw"
+        android:id="@+id/simListItemGeneration"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Bloodline Law" />
+        android:text="Generation" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemHeirLaw"
+        android:id="@+id/simListItemGender"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Heir Law" />
+        android:text="Gender" />
 </LinearLayout>

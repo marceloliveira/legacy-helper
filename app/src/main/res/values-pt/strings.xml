@@ -6,8 +6,9 @@
     <string name="action_settings">Configurações</string>
     <string name="action_new_legacy">Novo Legado</string>
     <string name="legacy_name">Nome do Legado</string>
-    <string name="createLegacy">Criar Legado</string>
-    <string name="editLegacy">Editar Legado</string>
+    <string name="create_legacy">Criar Legado</string>
+    <string name="edit_legacy">Editar Legado</string>
+    <string name="delete_legacy">Excluir Legado</string>
     <string name="cancel">Cancelar</string>
     <string name="title_activity_new_legacy">New Legacy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -540,5 +541,23 @@
     <string name="f_writer_journalist_9_career_path">Editora-Chefe</string>
     <string name="m_writer_journalist_10_career_path">Escriba da História</string>
     <string name="f_writer_journalist_10_career_path">Escriba da História</string>
+    <string name="blood_relative">Parente Cosanguíneo</string>
+    <string name="founder">Fundador</string>
+    <string name="primary_spouse">Cônjuge Primário</string>
+    <string name="spouse">Cônjuge</string>
+    <string name="title_section_sims">Sims</string>
+    <string name="adopted_child">Criança Adotada</string>
+    <string name="natural_child">Criança Natural</string>
+    <string name="sim_age">Idade</string>
+    <string name="sim_aspiration">Aspiração</string>
+    <string name="sim_name">Nome</string>
+    <string name="sim_sex">Sexo</string>
+    <string name="sim_traits">Traços</string>
+    <string name="sim_type">Tipo</string>
+    <string name="elder">Idoso</string>
+    <string name="adult">Adulto</string>
+    <string name="young_adult">Jovem Adulto</string>
+    <string name="male">Homem</string>
+    <string name="female">Mulher</string>
 
 </resources>

@@ -70,7 +70,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/createLegacy"
+            android:text="@string/create_legacy"
             android:id="@+id/newLegacyButton" />
 
         <Button

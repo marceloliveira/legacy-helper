@@ -302,4 +302,20 @@
         <item>@string/f_manual_laborer_career</item>
         <item>@string/f_retail_employee_career</item>
     </string-array>
+    <string-array name="sim_type_array">
+        <item>@string/founder</item>
+        <item>@string/spouse</item>
+        <item>@string/primary_spouse</item>
+        <item>@string/natural_child</item>
+        <item>@string/adopted_child</item>
+    </string-array>
+    <string-array name="sim_sex_array">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+    <string-array name="sim_age_array">
+        <item>@string/young_adult</item>
+        <item>@string/adult</item>
+        <item>@string/elder</item>
+    </string-array>
 </resources>
