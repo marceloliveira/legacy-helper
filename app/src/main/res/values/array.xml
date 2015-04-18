@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="gender_law_array">
-        <item>@string/select_gender_law</item>
+        <!--item>@string/select_gender_law</item-->
         <item>@string/strict_matriarchal_gender_law</item>
         <item>@string/matriarchal_gender_law</item>
         <item>@string/strict_patriarchal_gender_law</item>
@@ -10,7 +10,7 @@
         <item>@string/equality_gender_law</item>
     </string-array>
     <string-array name="bloodline_law_array">
-        <item>@string/select_bloodline_law</item>
+        <!--item>@string/select_bloodline_law</item-->
         <item>@string/strict_traditional_bloodline_law</item>
         <item>@string/traditional_bloodline_law</item>
         <item>@string/modern_bloodline_law</item>
@@ -18,7 +18,7 @@
         <item>@string/strict_foster_bloodline_law</item>
     </string-array>
     <string-array name="heir_law_array">
-        <item>@string/select_heir_law</item>
+        <!--item>@string/select_heir_law</item-->
         <item>@string/first_born_heir_law</item>
         <item>@string/last_born_heir_law</item>
         <item>@string/living_will_heir_law</item>

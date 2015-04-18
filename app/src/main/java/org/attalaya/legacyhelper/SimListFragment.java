@@ -1,5 +1,6 @@
 package org.attalaya.legacyhelper;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -77,6 +78,7 @@ public class SimListFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View addButton = rootView.findViewById(R.id.add_button);
             addButton.setOutlineProvider(new ViewOutlineProvider() {
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void getOutline(View view, Outline outline) {
                     int diameter = getResources().getDimensionPixelSize(R.dimen.floating_action_button_diameter);
@@ -110,7 +112,7 @@ public class SimListFragment extends Fragment {
         }
     }
 
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {

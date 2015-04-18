@@ -566,5 +566,6 @@
     <string name="young_adult">Young Adult</string>
     <string name="adult">Adult</string>
     <string name="elder">Elder</string>
+    <string name="select_exemplar_trait">Select Exemplar Trait</string>
 
 </resources>

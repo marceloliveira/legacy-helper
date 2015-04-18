@@ -2,12 +2,9 @@ package org.attalaya.legacyhelper;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.graphics.Outline;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -19,19 +16,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
-import org.attalaya.legacyhelper.LegacyHelperContract.Legacy;
+import org.attalaya.legacyhelper.model.Legacy;
 
-import java.util.Arrays;
+import io.realm.Realm;
+import io.realm.RealmBaseAdapter;
+import io.realm.RealmResults;
 
 public class LegacyListFragment extends Fragment {
 
     protected ActionMode mActionMode;
-    protected SimpleCursorAdapter mAdapter;
+    protected ListAdapter mAdapter;
     protected ListView legacys;
-    private static final String[] LEGACY_FIELDS = new String[]{Legacy._ID, Legacy.COLUMN_NAME_NAME, Legacy.COLUMN_NAME_GENDER_LAW, Legacy.COLUMN_NAME_BLOODLINE_LAW, Legacy.COLUMN_NAME_HEIR_LAW};
+    protected Legacy selectedLegacy;
+    protected Realm realm;
+    private static final String[] LEGACY_FIELDS = new String[]{LegacyHelperContract.Legacy._ID, LegacyHelperContract.Legacy.COLUMN_NAME_NAME, LegacyHelperContract.Legacy.COLUMN_NAME_GENDER_LAW, LegacyHelperContract.Legacy.COLUMN_NAME_BLOODLINE_LAW, LegacyHelperContract.Legacy.COLUMN_NAME_HEIR_LAW};
 
     public LegacyListFragment() {
     }
@@ -39,6 +41,7 @@ public class LegacyListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        realm = Realm.getInstance(getActivity());
         View rootView = inflater.inflate(R.layout.fragment_legacy_list, container, false);
         setHasOptionsMenu(true);
         legacys = (ListView)rootView.findViewById(R.id.legacys);
@@ -47,7 +50,7 @@ public class LegacyListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(parent.getContext(), LegacyActivity.class);
-                intent.putExtra(Legacy._ID, id);
+                intent.putExtra(LegacyHelperContract.Legacy._ID, id);
                 startActivity(intent);
             }
         });
@@ -62,13 +65,12 @@ public class LegacyListFragment extends Fragment {
                 mActionMode = getActivity().startActionMode(mActionModeCallback);
                 parent.setSelection(position);
                 ((ListView) parent).setItemChecked(position, true);
+                selectedLegacy = (Legacy)parent.getItemAtPosition(position);
                 view.setSelected(true);
                 return true;
             }
         });
-        mAdapter = new SimpleCursorAdapter(getActivity(),R.layout.list_item_legacy,null,LEGACY_FIELDS,new int[]{android.R.id.empty,R.id.legacyListItemName,R.id.legacyListItemGenderLaw,R.id.legacyListItemBloodlineLaw,R.id.legacyListItemHeirLaw},0);
-        LegacyLoaderTask task = new LegacyLoaderTask();
-        task.execute();
+        mAdapter = new LegacyAdapter(getActivity(),realm.allObjects(Legacy.class));
         legacys.setAdapter(mAdapter);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View addButton = rootView.findViewById(R.id.add_button);
@@ -92,13 +94,6 @@ public class LegacyListFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        LegacyLoaderTask task = new LegacyLoaderTask();
-        task.execute();
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.legacy_list, menu);
         MenuItem newLegacy = menu.findItem(R.id.action_new_legacy);
@@ -114,7 +109,7 @@ public class LegacyListFragment extends Fragment {
         }
     }
 
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -148,16 +143,16 @@ public class LegacyListFragment extends Fragment {
     };
 
     private void editLegacy() {
-        getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("edit")).addToBackStack(null).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("edit",selectedLegacy.getId())).addToBackStack(null).commit();
         getFragmentManager().executePendingTransactions();
     }
 
     public void newLegacy() {
-        getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("new")).addToBackStack(null).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("new",-1)).addToBackStack(null).commit();
         getFragmentManager().executePendingTransactions();
     }
 
-    protected class LegacyLoaderTask extends AsyncTask<Void, Void, Cursor> {
+    /*protected class LegacyLoaderTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
         protected Cursor doInBackground(Void... params) {
@@ -193,6 +188,50 @@ public class LegacyListFragment extends Fragment {
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
             mAdapter.swapCursor(cursor);
+        }
+    }*/
+
+    protected class LegacyAdapter extends RealmBaseAdapter<Legacy> implements ListAdapter {
+
+        private class LegacyViewHolder {
+            TextView name;
+            TextView genderlaw;
+            TextView bloodlinelaw;
+            TextView heirlaw;
+        }
+
+        public LegacyAdapter(Context context,
+                             RealmResults<Legacy> realmResults) {
+            super(context, realmResults, true);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LegacyViewHolder viewHolder;
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.list_item_legacy,
+                        parent, false);
+                viewHolder = new LegacyViewHolder();
+                viewHolder.name = (TextView) convertView.findViewById(R.id.legacyListItemName);
+                viewHolder.genderlaw = (TextView) convertView.findViewById(R.id.legacyListItemGenderLaw);
+                viewHolder.bloodlinelaw = (TextView) convertView.findViewById(R.id.legacyListItemBloodlineLaw);
+                viewHolder.heirlaw = (TextView) convertView.findViewById(R.id.legacyListItemHeirLaw);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (LegacyViewHolder) convertView.getTag();
+            }
+
+            Legacy item = realmResults.get(position);
+            viewHolder.name.setText(item.getName());
+            viewHolder.genderlaw.setText(item.getGenderLaw().getName());
+            viewHolder.bloodlinelaw.setText(item.getBloodlineLaw().getName());
+            viewHolder.heirlaw.setText(item.getHeirLaw().getName()+(item.getExemplarTrait()!=null?" - "+item.getExemplarTrait().getmName():""));
+            return convertView;
+        }
+
+        public RealmResults<Legacy> getRealmResults() {
+            return realmResults;
         }
     }
 }

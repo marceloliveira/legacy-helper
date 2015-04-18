@@ -23,7 +23,7 @@
     <string name="strict_equality_gender_law">Estritamente Igualitária</string>
     <string name="equality_gender_law">Igualitária</string>
     <string name="bloodline_law">Lei de Linhagem</string>
-    <string name="select_bloodline_law">Selecione Bloodline Law</string>
+    <string name="select_bloodline_law">Selecione a Lei de Linhagem</string>
     <string name="strict_traditional_bloodline_law">Estritamente Tradicional</string>
     <string name="traditional_bloodline_law">Tradicional</string>
     <string name="modern_bloodline_law">Moderna</string>
@@ -559,5 +559,6 @@
     <string name="young_adult">Jovem Adulto</string>
     <string name="male">Homem</string>
     <string name="female">Mulher</string>
+    <string name="select_exemplar_trait">Selecione o Traço Exemplar</string>
 
 </resources>
