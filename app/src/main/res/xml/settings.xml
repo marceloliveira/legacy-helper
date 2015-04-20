@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Base Game"
+        android:key="base">
+    <CheckBoxPreference
+        android:key="main"
+        android:title="The Sims 4"
+        android:summary="Base Game"
+        android:defaultValue="true"
+        android:enabled="false"
+        android:icon="@android:drawable/ic_menu_help"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Game Packs"
+        android:key="gp00">
+    <CheckBoxPreference
+        android:key="gp01"
+        android:title="Outdoor Retreat"
+        android:summary="Game Pack"
+        android:defaultValue="false"
+        android:icon="@android:drawable/ic_menu_help"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Expansion Pack"
+        android:key="ep00">
+    <CheckBoxPreference
+        android:key="ep01"
+        android:title="Get To Work"
+        android:summary="Expansion Pack"
+        android:defaultValue="false"
+        android:icon="@android:drawable/ic_menu_help"/>
+    </PreferenceCategory>
+</PreferenceScreen>

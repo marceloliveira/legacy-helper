@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import org.attalaya.legacyhelper.model.Law;
 import org.attalaya.legacyhelper.model.Trait;
+import org.attalaya.legacyhelper.settings.SettingsFragment;
 
 import io.realm.Realm;
 
@@ -50,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_new_legacy: openNewLegacy(); return true;
-            case R.id.action_settings: return true;
+            case R.id.action_settings: openSettings(); return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -58,6 +59,11 @@ public class MainActivity extends ActionBarActivity {
 
     public void openNewLegacy() {
         getFragmentManager().beginTransaction().replace(R.id.container, EditLegacyFragment.newInstance("new",-1)).addToBackStack(null).commit();
+        getFragmentManager().executePendingTransactions();
+    }
+
+    public void openSettings() {
+        getFragmentManager().beginTransaction().replace(R.id.container, new SettingsFragment()).addToBackStack(null).commit();
         getFragmentManager().executePendingTransactions();
     }
 
