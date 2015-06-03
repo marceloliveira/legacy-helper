@@ -14,7 +14,11 @@ public class Legacy extends RealmObject {
     private Law genderLaw;
     private Law bloodlineLaw;
     private Law heirLaw;
+    private Law speciesLaw;
     private Trait exemplarTrait;
+
+    public Legacy() {
+    }
 
     public int getId() {
         return id;
@@ -62,5 +66,13 @@ public class Legacy extends RealmObject {
 
     public void setExemplarTrait(Trait exemplarTrait) {
         this.exemplarTrait = exemplarTrait;
+    }
+
+    public Law getSpeciesLaw() {
+        return speciesLaw;
+    }
+
+    public void setSpeciesLaw(Law speciesLaw) {
+        this.speciesLaw = speciesLaw;
     }
 }

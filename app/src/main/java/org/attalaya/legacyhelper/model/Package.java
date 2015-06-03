@@ -4,18 +4,13 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
- * Created by Marcel on 07/03/2015.
+ * Created by Marcel on 04/05/2015.
  */
-public class Law extends RealmObject {
-
-    ;
+public class Package extends RealmObject {
 
     @PrimaryKey
     private int id;
-
     private String name;
-    private int type;
-    private Package pack;
 
     public int getId() {
         return id;
@@ -33,19 +28,4 @@ public class Law extends RealmObject {
         this.name = name;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public Package getPack() {
-        return pack;
-    }
-
-    public void setPack(Package pack) {
-        this.pack = pack;
-    }
 }

@@ -12,6 +12,7 @@ public class Aspiration extends RealmObject {
     private int id;
     private String mName;
     private String fName;
+    private Package pack;
 
     public int getId() {
         return id;
@@ -35,5 +36,13 @@ public class Aspiration extends RealmObject {
 
     public void setfName(String fName) {
         this.fName = fName;
+    }
+
+    public Package getPack() {
+        return pack;
+    }
+
+    public void setPack(Package pack) {
+        this.pack = pack;
     }
 }

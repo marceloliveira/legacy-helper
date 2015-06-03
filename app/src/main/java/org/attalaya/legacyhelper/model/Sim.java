@@ -12,6 +12,7 @@ public class Sim extends RealmObject {
     private int id;
     private String name;
     private String surname;
+    private Species species;
     private int generation;
     private int type;
     private int age;
@@ -44,6 +45,10 @@ public class Sim extends RealmObject {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public Species getSpecies() { return species; }
+
+    public void setSpecies(Species species) { this.species = species; }
 
     public int getGeneration() {
         return generation;

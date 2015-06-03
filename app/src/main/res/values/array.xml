@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="gender_law_array">
-        <!--item>@string/select_gender_law</item-->
+    <string-array name="game_package_array">
+        <item>@string/base_package</item>
+        <item>@string/gp01_package</item>
+        <item>@string/ep01_package</item>
+    </string-array>
+    <string-array name="base_gender_law_array">
         <item>@string/strict_matriarchal_gender_law</item>
         <item>@string/matriarchal_gender_law</item>
         <item>@string/strict_patriarchal_gender_law</item>
@@ -9,16 +13,14 @@
         <item>@string/strict_equality_gender_law</item>
         <item>@string/equality_gender_law</item>
     </string-array>
-    <string-array name="bloodline_law_array">
-        <!--item>@string/select_bloodline_law</item-->
+    <string-array name="base_bloodline_law_array">
         <item>@string/strict_traditional_bloodline_law</item>
         <item>@string/traditional_bloodline_law</item>
         <item>@string/modern_bloodline_law</item>
         <item>@string/foster_bloodline_law</item>
         <item>@string/strict_foster_bloodline_law</item>
     </string-array>
-    <string-array name="heir_law_array">
-        <!--item>@string/select_heir_law</item-->
+    <string-array name="base_heir_law_array">
         <item>@string/first_born_heir_law</item>
         <item>@string/last_born_heir_law</item>
         <item>@string/living_will_heir_law</item>
@@ -28,71 +30,96 @@
         <item>@string/exemplar_heir_law</item>
         <item>@string/democracy_heir_law</item>
     </string-array>
-    <string-array name="child_skill_array">
-        <item>@string/creativity_skill</item>
-        <item>@string/mental_skill</item>
-        <item>@string/motor_skill</item>
-        <item>@string/social_skill</item>
+    <string-array name="ep01_species_law_array">
+        <item>@string/xenoarchy_species_law</item>
+        <item>@string/xenophobic_species_law</item>
+        <item>@string/brood_species_law</item>
+        <item>@string/tolerant_species_law</item>
     </string-array>
-    <string-array name="adult_skill_array">
-        <item>@string/charisma_skill</item>
-        <item>@string/comedy_skill</item>
-        <item>@string/cooking_skill</item>
-        <item>@string/fishing_skill</item>
-        <item>@string/fitness_skill</item>
-        <item>@string/gardening_skill</item>
-        <item>@string/gourmet_cooking_skill</item>
-        <item>@string/guitar_skill</item>
-        <item>@string/handiness_skill</item>
-        <item>@string/logic_skill</item>
-        <item>@string/mischief_skill</item>
-        <item>@string/mixology_skill</item>
-        <item>@string/painting_skill</item>
-        <item>@string/piano_skill</item>
-        <item>@string/programming_skill</item>
-        <item>@string/rocket_science_skill</item>
-        <item>@string/video_gaming_skill</item>
-        <item>@string/violin_skill</item>
-        <item>@string/writing_skill</item>
+    <string-array name="base_child_skill_array">
+        <item>@string/creativity_skill</item><!-- 0 -->
+        <item>@string/mental_skill</item><!-- 1 -->
+        <item>@string/motor_skill</item><!-- 2 -->
+        <item>@string/social_skill</item><!-- 3 -->
     </string-array>
-    <string-array name="m_trait_array">
-        <item>@string/m_active_trait</item>
-        <item>@string/m_ambitious_trait</item>
-        <item>@string/m_art_lover_trait</item>
-        <item>@string/m_bookworm_trait</item>
-        <item>@string/m_bro_trait</item>
-        <item>@string/m_cheerful_trait</item>
-        <item>@string/m_childish_trait</item>
-        <item>@string/m_clumsy_trait</item>
-        <item>@string/m_creative_trait</item>
-        <item>@string/m_evil_trait</item>
-        <item>@string/m_family_oriented_trait</item>
-        <item>@string/m_foodie_trait</item>
-        <item>@string/m_geek_trait</item>
-        <item>@string/m_genius_trait</item>
-        <item>@string/m_gloomy_trait</item>
-        <item>@string/m_glutton_trait</item>
-        <item>@string/m_good_trait</item>
-        <item>@string/m_goofball_trait</item>
-        <item>@string/m_hates_children_trait</item>
-        <item>@string/m_hot_headed_trait</item>
-        <item>@string/m_insane_trait</item>
-        <item>@string/m_lazy_trait</item>
-        <item>@string/m_loner_trait</item>
-        <item>@string/m_loves_outdoors_trait</item>
-        <item>@string/m_materialistic_trait</item>
-        <item>@string/m_mean_trait</item>
-        <item>@string/m_music_lover_trait</item>
-        <item>@string/m_neat_trait</item>
-        <item>@string/m_noncommittal_trait</item>
-        <item>@string/m_outgoing_trait</item>
-        <item>@string/m_perfectionist_trait</item>
-        <item>@string/m_romantic_trait</item>
-        <item>@string/m_self_assured_trait</item>
-        <item>@string/m_slob_trait</item>
-        <item>@string/m_snob_trait</item>
+    <string-array name="base_adult_skill_array">
+        <item>@string/charisma_skill</item><!-- 4 -->
+        <item>@string/comedy_skill</item><!-- 5 -->
+        <item>@string/cooking_skill</item><!-- 6 -->
+        <item>@string/fishing_skill</item><!-- 7 -->
+        <item>@string/fitness_skill</item><!-- 8 -->
+        <item>@string/gardening_skill</item><!-- 9 -->
+        <item>@string/gourmet_cooking_skill</item><!-- 10 -->
+        <item>@string/guitar_skill</item><!-- 11 -->
+        <item>@string/handiness_skill</item><!-- 12 -->
+        <item>@string/logic_skill</item><!-- 13 -->
+        <item>@string/mischief_skill</item><!-- 14 -->
+        <item>@string/mixology_skill</item><!-- 15 -->
+        <item>@string/painting_skill</item><!-- 16 -->
+        <item>@string/piano_skill</item><!-- 17 -->
+        <item>@string/programming_skill</item><!-- 18 -->
+        <item>@string/rocket_science_skill</item><!-- 19 -->
+        <item>@string/video_gaming_skill</item><!-- 20 -->
+        <item>@string/violin_skill</item><!-- 21 -->
+        <item>@string/writing_skill</item><!-- 22 -->
     </string-array>
-    <string-array name="f_trait_array">
+    <string-array name="gp01_adult_skill_array">
+        <item>@string/herbalism_skill</item><!-- 23 -->
+    </string-array>
+    <string-array name="ep01_adult_skill_array">
+        <item>@string/baking_skill</item><!-- 24 -->
+        <item>@string/photography_skill</item><!-- 25 -->
+    </string-array>
+    <string-array name="child_unlock_skill_array">
+        <item>0,17</item>
+        <item>0,21</item>
+        <item>1,7</item>
+        <item>1,13</item>
+        <item>1,20</item>
+        <item>3,4</item>
+        <item>3,14</item>
+    </string-array>
+    <string-array name="base_m_trait_array">
+        <item>@string/m_active_trait</item><!-- 0 -->
+        <item>@string/m_ambitious_trait</item><!-- 1 -->
+        <item>@string/m_art_lover_trait</item><!-- 2 -->
+        <item>@string/m_bookworm_trait</item><!-- 3 -->
+        <item>@string/m_bro_trait</item><!-- 4 -->
+        <item>@string/m_cheerful_trait</item><!-- 5 -->
+        <item>@string/m_childish_trait</item><!-- 6 -->
+        <item>@string/m_clumsy_trait</item><!-- 7 -->
+        <item>@string/m_creative_trait</item><!-- 8 -->
+        <item>@string/m_evil_trait</item><!-- 9 -->
+        <item>@string/m_family_oriented_trait</item><!-- 10 -->
+        <item>@string/m_foodie_trait</item><!-- 11 -->
+        <item>@string/m_geek_trait</item><!-- 12 -->
+        <item>@string/m_genius_trait</item><!-- 13 -->
+        <item>@string/m_gloomy_trait</item><!-- 14 -->
+        <item>@string/m_glutton_trait</item><!-- 15 -->
+        <item>@string/m_good_trait</item><!-- 16 -->
+        <item>@string/m_goofball_trait</item><!-- 17 -->
+        <item>@string/m_hates_children_trait</item><!-- 18 -->
+        <item>@string/m_hot_headed_trait</item><!-- 19 -->
+        <item>@string/m_insane_trait</item><!-- 20 -->
+        <item>@string/m_lazy_trait</item><!-- 21 -->
+        <item>@string/m_loner_trait</item><!-- 22 -->
+        <item>@string/m_loves_outdoors_trait</item><!-- 23 -->
+        <item>@string/m_materialistic_trait</item><!-- 24 -->
+        <item>@string/m_mean_trait</item><!-- 25 -->
+        <item>@string/m_music_lover_trait</item><!-- 26 -->
+        <item>@string/m_neat_trait</item><!-- 27 -->
+        <item>@string/m_noncommittal_trait</item><!-- 28 -->
+        <item>@string/m_outgoing_trait</item><!-- 29 -->
+        <item>@string/m_perfectionist_trait</item><!-- 30 -->
+        <item>@string/m_romantic_trait</item><!-- 31 -->
+        <item>@string/m_self_assured_trait</item><!-- 32 -->
+        <item>@string/m_slob_trait</item><!-- 33 -->
+        <item>@string/m_snob_trait</item><!-- 34 -->
+    </string-array>
+    <string-array name="gp01_m_trait_array">
+        <item>@string/m_squeamish_trait</item><!-- 35 -->
+    </string-array>
+    <string-array name="base_f_trait_array">
         <item>@string/f_active_trait</item>
         <item>@string/f_ambitious_trait</item>
         <item>@string/f_art_lover_trait</item>
@@ -129,46 +156,50 @@
         <item>@string/f_slob_trait</item>
         <item>@string/f_snob_trait</item>
     </string-array>
+    <string-array name="gp01_f_trait_array">
+        <item>@string/f_squeamish_trait</item>
+    </string-array>
     <integer-array name="child_trait_array">
-        <item>0</item>
-        <item>2</item>
-        <item>3</item>
-        <item>5</item>
-        <item>8</item>
-        <item>9</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>19</item>
-        <item>20</item>
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>25</item>
-        <item>26</item>
-        <item>27</item>
-        <item>29</item>
-        <item>30</item>
-        <item>32</item>
-        <item>33</item>
+        <item>0</item><!-- active -->
+        <item>2</item><!-- art_lover -->
+        <item>3</item><!-- bookworm -->
+        <item>5</item><!-- cheerful -->
+        <item>8</item><!-- creative -->
+        <item>9</item><!-- evil -->
+        <item>12</item><!-- geek -->
+        <item>13</item><!-- genius -->
+        <item>14</item><!-- gloomy -->
+        <item>15</item><!-- glutton -->
+        <item>16</item><!-- good -->
+        <item>17</item><!-- goofball -->
+        <item>19</item><!-- hot_headed -->
+        <item>20</item><!-- insane -->
+        <item>21</item><!-- lazy -->
+        <item>22</item><!-- loner -->
+        <item>23</item><!-- loves_outdoors -->
+        <item>25</item><!-- mean -->
+        <item>26</item><!-- music_lover -->
+        <item>27</item><!-- neat -->
+        <item>29</item><!-- outgoing -->
+        <item>30</item><!-- perfectionist -->
+        <item>32</item><!-- self_assured -->
+        <item>33</item><!-- slob -->
+        <item>35</item><!-- squeamish -->
     </integer-array>
     <integer-array name="teen_trait_array">
-        <item>4</item>
-        <item>6</item>
-        <item>7</item>
-        <item>11</item>
-        <item>18</item>
-        <item>24</item>
-        <item>31</item>
-        <item>34</item>
+        <item>4</item><!-- bro -->
+        <item>6</item><!-- childish -->
+        <item>7</item><!-- clumsy -->
+        <item>11</item><!-- foodie -->
+        <item>18</item><!-- hates_children -->
+        <item>24</item><!-- materialistic -->
+        <item>31</item><!-- romantic -->
+        <item>34</item><!-- snob -->
     </integer-array>
     <integer-array name="adult_trait_array">
-        <item>1</item>
-        <item>10</item>
-        <item>28</item>
+        <item>1</item><!-- ambitious -->
+        <item>10</item><!-- family_oriented -->
+        <item>28</item><!-- noncommittal -->
     </integer-array>
     <string-array name="incompatible_trait_array">
         <item>0,20</item>
@@ -188,20 +219,21 @@
         <item>21,27</item>
         <item>22,29</item>
         <item>27,33</item>
+        <item>23,35</item>
     </string-array>
-    <string-array name="m_child_aspiration_array">
+    <string-array name="base_m_child_aspiration_array">
         <item>@string/m_creativity_artistic_prodigy_aspiration</item>
         <item>@string/m_mental_whiz_kid_aspiration</item>
         <item>@string/m_motor_rambunctious_scamp_aspiration</item>
         <item>@string/m_social_social_butterfly_aspiration</item>
     </string-array>
-    <string-array name="f_child_aspiration_array">
+    <string-array name="base_f_child_aspiration_array">
         <item>@string/f_creativity_artistic_prodigy_aspiration</item>
         <item>@string/f_mental_whiz_kid_aspiration</item>
         <item>@string/f_motor_rambunctious_scamp_aspiration</item>
         <item>@string/f_social_social_butterfly_aspiration</item>
     </string-array>
-    <string-array name="m_adult_aspiration_array">
+    <string-array name="base_m_adult_aspiration_array">
         <item>@string/m_athletic_body_builder_aspiration</item>
         <item>@string/m_creativity_bestselling_author_aspiration</item>
         <item>@string/m_creativity_musical_genius_aspiration</item>
@@ -226,7 +258,10 @@
         <item>@string/m_popularity_joke_star_aspiration</item>
         <item>@string/m_popularity_party_animal_aspiration</item>
     </string-array>
-    <string-array name="f_adult_aspiration_array">
+    <string-array name="gp01_m_adult_aspiration_array">
+        <item>@string/m_nature_outdoor_enthusiast_aspiration</item>
+    </string-array>
+    <string-array name="base_f_adult_aspiration_array">
         <item>@string/f_athletic_body_builder_aspiration</item>
         <item>@string/f_creativity_bestselling_author_aspiration</item>
         <item>@string/f_creativity_musical_genius_aspiration</item>
@@ -251,7 +286,10 @@
         <item>@string/f_popularity_joke_star_aspiration</item>
         <item>@string/f_popularity_party_animal_aspiration</item>
     </string-array>
-    <string-array name="death_method_array">
+    <string-array name="gp01_f_adult_aspiration_array">
+        <item>@string/f_nature_outdoor_enthusiast_aspiration</item>
+    </string-array>
+    <string-array name="base_death_method_array">
         <item>@string/cardiac_explosion_death</item>
         <item>@string/cowplant_death</item>
         <item>@string/drowning_death</item>
@@ -262,9 +300,8 @@
         <item>@string/laughter_death</item>
         <item>@string/old_age_death</item>
         <item>@string/over_exertion_death</item>
-        <item>@string/rocket_crash_death</item>
     </string-array>
-    <string-array name="m_fulltime_job_array">
+    <string-array name="base_m_fulltime_job_array">
         <item>@string/m_astronaut_career</item>
         <item>@string/m_athletic_career</item>
         <item>@string/m_business_career</item>
@@ -276,7 +313,7 @@
         <item>@string/m_tech_guru_career</item>
         <item>@string/m_writer_career</item>
     </string-array>
-    <string-array name="f_fulltime_job_array">
+    <string-array name="base_f_fulltime_job_array">
         <item>@string/f_astronaut_career</item>
         <item>@string/f_athletic_career</item>
         <item>@string/f_business_career</item>
@@ -288,14 +325,14 @@
         <item>@string/f_tech_guru_career</item>
         <item>@string/f_writer_career</item>
     </string-array>
-    <string-array name="m_parttime_job_array">
+    <string-array name="base_m_parttime_job_array">
         <item>@string/m_babysitter_career</item>
         <item>@string/m_barista_career</item>
         <item>@string/m_fast_food_employee_career</item>
         <item>@string/m_manual_laborer_career</item>
         <item>@string/m_retail_employee_career</item>
     </string-array>
-    <string-array name="f_parttime_job_array">
+    <string-array name="base_f_parttime_job_array">
         <item>@string/f_babysitter_career</item>
         <item>@string/f_barista_career</item>
         <item>@string/f_fast_food_employee_career</item>
@@ -317,5 +354,11 @@
         <item>@string/young_adult</item>
         <item>@string/adult</item>
         <item>@string/elder</item>
+    </string-array>
+    <string-array name="base_sim_species_array">
+        <item>@string/human_species</item>
+    </string-array>
+    <string-array name="ep01_sim_species_array">
+        <item>@string/alien_species</item>
     </string-array>
 </resources>

@@ -11,6 +11,9 @@ public class Skill extends RealmObject {
     @PrimaryKey
     private int id;
     private String name;
+    private boolean child;
+    private Skill childUnlock;
+    private Package pack;
 
     public int getId() {
         return id;
@@ -26,5 +29,29 @@ public class Skill extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Package getPack() {
+        return pack;
+    }
+
+    public void setPack(Package pack) {
+        this.pack = pack;
+    }
+
+    public boolean isChild() {
+        return child;
+    }
+
+    public void setChild(boolean child) {
+        this.child = child;
+    }
+
+    public Skill getChildUnlock() {
+        return childUnlock;
+    }
+
+    public void setChildUnlock(Skill childUnlock) {
+        this.childUnlock = childUnlock;
     }
 }

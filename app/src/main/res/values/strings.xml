@@ -24,7 +24,7 @@
     <string name="blood_relative">Blood Relative</string>
     <string name="spouse">Spouse</string>
     <!-- Laws -->
-    <string name="select_all_laws">Select all the three laws</string>
+    <string name="select_all_laws">Select all laws</string>
     <string name="gender_law">Gender Law</string>
     <string name="select_gender_law">Select Gender Law</string>
     <string name="strict_matriarchal_gender_law">Strict Matriarchal</string>
@@ -567,5 +567,29 @@
     <string name="adult">Adult</string>
     <string name="elder">Elder</string>
     <string name="select_exemplar_trait">Select Exemplar Trait</string>
-
+    <string name="species_law">Species Law</string>
+    <string name="select_species_law">Select Species Law</string>
+    <string name="xenoarchy_species_law">Xenoarchy</string>
+    <string name="xenophobic_species_law">Xenophobic</string>
+    <string name="brood_species_law">Brood</string>
+    <string name="tolerant_species_law">Tolerant</string>
+    <string name="alien_species">Alien</string>
+    <string name="human_species">Human</string>
+    <string name="base_package">The Sims 4</string>
+    <string name="gp01_package">Outdoor Retreat</string>
+    <string name="ep01_package">Get To Work</string>
+    <string name="base_game">Base Game</string>
+    <string name="base_package_summary">Base Game</string>
+    <string name="game_pack">Game Pack</string>
+    <string name="gp01_package_summary">Game Pack 01</string>
+    <string name="expansion_pack">Expansion Pack</string>
+    <string name="ep01_package_summary">Expansion Pack 01</string>
+    <string name="herbalism_skill">Herbalism</string>
+    <string name="f_squeamish_trait">Squeamish</string>
+    <string name="m_squeamish_trait">Squeamish</string>
+    <string name="m_nature_outdoor_enthusiast_aspiration">Outdoor Enthusiast</string>
+    <string name="f_nature_outdoor_enthusiast_aspiration">Outdoor Enthusiast</string>
+    <string name="baking_skill">Baking</string>
+    <string name="photography_skill">Photography</string>
+    <string name="legacy_name_empty">Name your legacy</string>
 </resources>

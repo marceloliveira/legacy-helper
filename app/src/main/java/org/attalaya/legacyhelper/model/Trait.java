@@ -13,6 +13,7 @@ public class Trait extends RealmObject {
     private int id;
     private String mName;
     private String fName;
+    private Package pack;
     private RealmList<Trait> incompatibleTraits;
     private boolean child;
     private boolean teen;
@@ -63,5 +64,13 @@ public class Trait extends RealmObject {
 
     public void setTeen(boolean teen) {
         this.teen = teen;
+    }
+
+    public Package getPack() {
+        return pack;
+    }
+
+    public void setPack(Package pack) {
+        this.pack = pack;
     }
 }

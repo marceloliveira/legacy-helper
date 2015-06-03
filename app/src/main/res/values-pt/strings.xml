@@ -10,10 +10,9 @@
     <string name="edit_legacy">Editar Legado</string>
     <string name="delete_legacy">Excluir Legado</string>
     <string name="cancel">Cancelar</string>
-    <string name="title_activity_new_legacy">New Legacy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Laws-->
-    <string name="select_all_laws">Selecione as três leis</string>
+    <string name="select_all_laws">Selecione todas as leis</string>
     <string name="gender_law">Lei de Gênero</string>
     <string name="select_gender_law">Selecione a Lei de Gênero</string>
     <string name="strict_matriarchal_gender_law">Estritamente Matriarcal</string>
@@ -560,5 +559,29 @@
     <string name="male">Homem</string>
     <string name="female">Mulher</string>
     <string name="select_exemplar_trait">Selecione o Traço Exemplar</string>
+    <string name="xenoarchy_species_law">Xenoarquia</string>
+    <string name="xenophobic_species_law">Xenofóbico</string>
+    <string name="tolerant_species_law">Tolerante</string>
+    <string name="brood_species_law">Prole</string>
+    <string name="alien_species">Alienígena</string>
+    <string name="human_species">Humano</string>
+    <string name="base_package">The Sims 4</string>
+    <string name="ep01_package">Ao Trabalho</string>
+    <string name="gp01_package">Retiro ao Ar Livre</string>
+    <string name="base_game">Jogo Base</string>
+    <string name="ep01_package_summary">Pacote de Expansão 01</string>
+    <string name="expansion_pack">Pacote de Expansão</string>
+    <string name="game_pack">Pacote de Jogo</string>
+    <string name="gp01_package_summary">Pacote de Jogo 01</string>
+    <string name="base_package_summary">Jogo Base</string>
+    <string name="baking_skill">Confeitaria</string>
+    <string name="f_nature_outdoor_enthusiast_aspiration">Entusiasta do Ar Livre</string>
+    <string name="f_squeamish_trait">Enjoada</string>
+    <string name="herbalism_skill">Herbalismo</string>
+    <string name="m_squeamish_trait">Enjoado</string>
+    <string name="m_nature_outdoor_enthusiast_aspiration">Entusiasta do Ar Livre</string>
+    <string name="legacy_name_empty">Nomeie seu legado</string>
+    <string name="species_law">Lei de Espécie</string>
+    <string name="select_species_law">Selecione a Lei de Espécie</string>
 
 </resources>

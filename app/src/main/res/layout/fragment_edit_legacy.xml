@@ -5,16 +5,17 @@
     android:weightSum="1"
     tools:context="org.attalaya.legacyhelper.EditLegacyFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/legacy_name" />
-
+        >
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/legacyNameText"
-        android:inputType="textPersonName" />
+        android:hint="@string/legacy_name"
+        android:textColorHint="@color/material_green_A200" />
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,7 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:id="@+id/exemplarTraitField">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +62,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/exemplarTraitSpinner" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/speciesLawField">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/species_law" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/speciesLawSpinner" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
