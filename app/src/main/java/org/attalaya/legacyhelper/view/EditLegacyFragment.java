@@ -1,7 +1,6 @@
-package org.attalaya.legacyhelper;
+package org.attalaya.legacyhelper.view;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -11,31 +10,28 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import org.attalaya.legacyhelper.R;
 import org.attalaya.legacyhelper.controller.DataController;
 import org.attalaya.legacyhelper.controller.LegacyController;
 import org.attalaya.legacyhelper.model.Law;
 import org.attalaya.legacyhelper.model.Legacy;
 import org.attalaya.legacyhelper.model.Trait;
-
-import io.realm.RealmBaseAdapter;
-import io.realm.RealmObject;
-import io.realm.RealmResults;
+import org.attalaya.legacyhelper.util.DataRealmSpinnerAdapter;
 
 
 public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private LegacyController controller;
-    private DataController dataController;
-
     private static final String ARG_ACTION = "action";
     private static final String ARG_LEGACY_ID = "mLegacyId";
-
+    private LegacyController controller;
+    private DataController dataController;
     private String mAction;
     private int mLegacyId;
+
+    public EditLegacyFragment() {
+    }
 
     public static EditLegacyFragment newInstance(String action, int legacyId) {
         EditLegacyFragment fragment = new EditLegacyFragment();
@@ -44,9 +40,6 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
         args.putInt(ARG_LEGACY_ID, legacyId);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public EditLegacyFragment() {
     }
 
     @Override
@@ -68,27 +61,27 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
         EditText legacyName = (EditText) rootView.findViewById(R.id.legacyNameText);
 
         Spinner genderLawSpinner = (Spinner) rootView.findViewById(R.id.genderLawSpinner);
-        RealmSpinnerAdapter<Law> genderLawSpinnerAdapter = new RealmSpinnerAdapter<>(getActivity(), dataController.getGenderLaws());
+        DataRealmSpinnerAdapter<Law> genderLawSpinnerAdapter = new DataRealmSpinnerAdapter<>(getActivity(), dataController.getGenderLaws());
         genderLawSpinner.setAdapter(genderLawSpinnerAdapter);
         genderLawSpinner.setOnItemSelectedListener(this);
 
         Spinner bloodlineLawSpinner = (Spinner) rootView.findViewById(R.id.bloodlineLawSpinner);
-        RealmSpinnerAdapter<Law> bloodlineLawSpinnerAdapter = new RealmSpinnerAdapter<>(getActivity(), dataController.getBloodlineLaws());
+        DataRealmSpinnerAdapter<Law> bloodlineLawSpinnerAdapter = new DataRealmSpinnerAdapter<>(getActivity(), dataController.getBloodlineLaws());
         bloodlineLawSpinner.setAdapter(bloodlineLawSpinnerAdapter);
         bloodlineLawSpinner.setOnItemSelectedListener(this);
 
         Spinner heirLawSpinner = (Spinner) rootView.findViewById(R.id.heirLawSpinner);
-        RealmSpinnerAdapter<Law> heirLawSpinnerAdapter = new RealmSpinnerAdapter<>(getActivity(), dataController.getHeirLaws());
+        DataRealmSpinnerAdapter<Law> heirLawSpinnerAdapter = new DataRealmSpinnerAdapter<>(getActivity(), dataController.getHeirLaws());
         heirLawSpinner.setAdapter(heirLawSpinnerAdapter);
         heirLawSpinner.setOnItemSelectedListener(this);
 
         Spinner exemplarTraitSpinner = (Spinner) rootView.findViewById(R.id.exemplarTraitSpinner);
-        RealmSpinnerAdapter<Trait> exemplarTraitAdapter = new RealmSpinnerAdapter<>(getActivity(), dataController.getTraits());
+        DataRealmSpinnerAdapter<Trait> exemplarTraitAdapter = new DataRealmSpinnerAdapter<>(getActivity(), dataController.getAllTraits());
         exemplarTraitSpinner.setAdapter(exemplarTraitAdapter);
         exemplarTraitSpinner.setOnItemSelectedListener(this);
 
         Spinner speciesLawSpinner = (Spinner) rootView.findViewById(R.id.speciesLawSpinner);
-        RealmSpinnerAdapter<Law> speciesLawSpinnerAdapter = new RealmSpinnerAdapter<>(getActivity(), dataController.getSpeciesLaws());
+        DataRealmSpinnerAdapter<Law> speciesLawSpinnerAdapter = new DataRealmSpinnerAdapter<>(getActivity(), dataController.getSpeciesLaws());
         speciesLawSpinner.setAdapter(speciesLawSpinnerAdapter);
         speciesLawSpinner.setOnItemSelectedListener(this);
         if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("ep01", false)) {
@@ -112,6 +105,9 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
             heirLawSpinner.setSelection(heirLawSpinnerAdapter.getPosition(legacy.getHeirLaw()));
             if (legacy.getHeirLaw().getName().equals(getActivity().getResources().getString(R.string.exemplar_heir_law))) {
                 exemplarTraitSpinner.setSelection(exemplarTraitAdapter.getPosition(legacy.getExemplarTrait()));
+            }
+            if ((PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("ep01", false))&&(legacy.getSpeciesLaw()!=null)) {
+                speciesLawSpinner.setSelection(speciesLawSpinnerAdapter.getPosition(legacy.getSpeciesLaw()));
             }
         }
 
@@ -146,7 +142,7 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
                 View rootView = getView();
                 EditText legacyNameText = null;
                 String legacyName = "";
-                Law genderLaw = null,bloodlineLaw = null,heirLaw = null;
+                Law genderLaw = null,bloodlineLaw = null,heirLaw = null,speciesLaw = null;
                 Trait exemplarTrait = null;
                 if (rootView!=null) {
                     legacyNameText = ((EditText) getView().findViewById(R.id.legacyNameText));
@@ -155,6 +151,7 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
                     bloodlineLaw = (Law)((Spinner) rootView.findViewById(R.id.bloodlineLawSpinner)).getSelectedItem();
                     heirLaw = (Law)((Spinner) rootView.findViewById(R.id.heirLawSpinner)).getSelectedItem();
                     exemplarTrait = (Trait)((Spinner) rootView.findViewById(R.id.exemplarTraitSpinner)).getSelectedItem();
+                    speciesLaw = (Law)((Spinner) rootView.findViewById(R.id.speciesLawSpinner)).getSelectedItem();
                 }
                 if (legacyName.equals("")) {
                     if (legacyNameText!=null)
@@ -177,72 +174,10 @@ public class EditLegacyFragment extends Fragment implements AdapterView.OnItemSe
                 } else {
                     exemplarTrait = null;
                 }
-                controller.createOrUpdateLegacy(mLegacyId, legacyName, genderLaw, bloodlineLaw, heirLaw, exemplarTrait);
+                controller.createOrUpdateLegacy(mLegacyId, legacyName, genderLaw, bloodlineLaw, heirLaw, exemplarTrait, speciesLaw);
                 getFragmentManager().popBackStack();
                 break;
             case R.id.cancelNewLegacyButton: getFragmentManager().popBackStack(); break;
-        }
-    }
-
-    protected class RealmSpinnerAdapter<E extends RealmObject> extends RealmBaseAdapter<E> implements SpinnerAdapter {
-
-        private DataController dataController;
-
-        public RealmSpinnerAdapter(Context context,
-                                   RealmResults<E> realmResults) {
-            super(context, realmResults, true);
-            dataController = DataController.getInstance(context);
-        }
-
-        @Override
-        public int getCount() {
-            return super.getCount()+1;
-        }
-
-        @Override
-        public E getItem(int i) {
-            if (i==0)
-                return null;
-            return realmResults.get(i-1);
-        }
-
-        public int getPosition(E item) {
-            int position = -1;
-            for (int i = 0; i < realmResults.size(); i++) {
-                if (dataController.equalsObjects(realmResults.get(i), item)) {
-                    position = i;
-                }
-            }
-            return position+1;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (position == 0) {
-                convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
-                ((TextView) convertView).setText("");
-                return convertView;
-            } else {
-                convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
-                E item = realmResults.get(position-1);
-                ((TextView) convertView).setText(dataController.getDefaultName(item));
-                return convertView;
-            }
-        }
-
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            if (position == 0) {
-                convertView = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
-                ((TextView) convertView).setText("");
-                return convertView;
-            } else {
-                convertView = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
-                E item = realmResults.get(position-1);
-                ((TextView) convertView).setText(dataController.getDefaultName(item));
-                return convertView;
-            }
         }
     }
 

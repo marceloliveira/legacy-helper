@@ -11,8 +11,8 @@ public class Trait extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private String mName;
-    private String fName;
+    private String maleName;
+    private String femaleName;
     private Package pack;
     private RealmList<Trait> incompatibleTraits;
     private boolean child;
@@ -34,20 +34,20 @@ public class Trait extends RealmObject {
         this.incompatibleTraits = incompatibleTraits;
     }
 
-    public String getmName() {
-        return mName;
+    public String getMaleName() {
+        return maleName;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setMaleName(String maleName) {
+        this.maleName = maleName;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFemaleName() {
+        return femaleName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFemaleName(String femaleName) {
+        this.femaleName = femaleName;
     }
 
     public boolean isChild() {

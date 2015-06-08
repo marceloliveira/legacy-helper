@@ -592,4 +592,7 @@
     <string name="baking_skill">Baking</string>
     <string name="photography_skill">Photography</string>
     <string name="legacy_name_empty">Name your legacy</string>
+    <string name="teen">Teen</string>
+    <string name="baby">Baby</string>
+    <string name="child">Child</string>
 </resources>

@@ -17,10 +17,6 @@
             </intent-filter>
         </activity>
 
-        <provider
-            android:name=".LegacyHelperContentProvider"
-            android:authorities="org.attalaya.legacyhelper.provider" />
-
         <activity
             android:name=".LegacyActivity"
             android:label="@string/title_activity_legacy"

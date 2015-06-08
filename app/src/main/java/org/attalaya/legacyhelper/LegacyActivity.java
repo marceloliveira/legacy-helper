@@ -2,7 +2,6 @@ package org.attalaya.legacyhelper;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,7 +35,7 @@ public class LegacyActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legacy);
         Intent intent = getIntent();
-        legacyId = intent.getLongExtra(LegacyHelperContract.Legacy._ID,0);
+        legacyId = intent.getLongExtra("id",0);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -142,15 +141,7 @@ public class LegacyActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            String[] queryFields = {LegacyHelperContract.Legacy.COLUMN_NAME_NAME};
-            String[] selection = {String.valueOf(((LegacyActivity)getActivity()).legacyId)};
             View rootView = inflater.inflate(R.layout.fragment_legacy_overview, container, false);
-            legacyName = (TextView)rootView.findViewById(R.id.legacy_name);
-            Cursor mCursor = getActivity().getContentResolver().query(LegacyHelperContract.Legacy.CONTENT_URI, queryFields, LegacyHelperContract.Legacy._ID+" = ?", selection, null);
-            if (mCursor.getCount()>0) {
-                mCursor.moveToFirst();
-                legacyName.setText(mCursor.getString(0));
-            }
             return rootView;
         }
 

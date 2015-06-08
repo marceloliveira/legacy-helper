@@ -69,8 +69,34 @@ public class DataController {
         return getQuery(Skill.class).findAll();
     }
 
-    public RealmResults<Trait> getTraits() {
+    public RealmResults<Trait> getAllTraits() {
         return getQuery(Trait.class).findAll();
+    }
+
+    public RealmResults<Trait> getTraits(int age, Trait firstTrait, Trait secondTrait) {
+        RealmQuery<Trait> query = getQuery(Trait.class);
+        if (firstTrait!=null) {
+            query.notEqualTo("id", firstTrait.getId());
+            for (Trait t: firstTrait.getIncompatibleTraits()) {
+                query.notEqualTo("id",t.getId());
+            }
+        }
+        if (secondTrait!=null) {
+            query.notEqualTo("id",secondTrait.getId());
+            for (Trait t: secondTrait.getIncompatibleTraits()) {
+                query.notEqualTo("id",t.getId());
+            }
+        }
+        switch (age) {
+            case 0: query.equalTo("id",-1); break;
+            case 1: query.equalTo("child",true); break;
+            case 2: query.equalTo("teen",true); break;
+        }
+        return query.findAll();
+    }
+
+    public Trait getTraitByMName(String mName) {
+        return getQuery(Trait.class).equalTo("mName",mName).findFirst();
     }
 
     public String getDefaultName(RealmObject item) {
@@ -83,7 +109,7 @@ public class DataController {
         } else if (item instanceof Skill) {
             return ((Skill)item).getName();
         } else if (item instanceof Trait) {
-            return ((Trait)item).getmName();
+            return ((Trait)item).getMaleName();
         } else if (item instanceof Aspiration) {
             return ((Aspiration)item).getmName();
         } else {

@@ -1,45 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:minHeight="?android:attr/listPreferredItemHeightLarge"
-    android:backgroundTint="@color/list_item">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemName"
-        android:textAppearance="?android:attr/textAppearanceListItem"
-        android:gravity="center_vertical"
-        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Legacy Name"/>
+    android:descendantFocusability="blocksDescendants">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemGenderLaw"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Gender Law" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemBloodlineLaw"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Bloodline Law" />
+        <org.attalaya.legacyhelper.view.LegacyHelperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/legacyListItemName"
+            android:textAppearance="@style/ListTitle"
+            android:gravity="center_vertical"
+            android:text="@string/legacy_name"
+            custom:realmField="name"
+            custom:pack="main" />
 
-    <TextView
+        <org.attalaya.legacyhelper.view.LegacyHelperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/legacyListItemGenderLaw"
+            android:textAppearance="@style/ListSubtitle"
+            android:text="@string/gender_law"
+            custom:realmField="genderLaw.name"
+            custom:pack="main" />
+
+        <org.attalaya.legacyhelper.view.LegacyHelperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/legacyListItemBloodlineLaw"
+            android:textAppearance="@style/ListSubtitle"
+            android:text="@string/bloodline_law"
+            custom:realmField="bloodlineLaw.name"
+            custom:pack="main" />
+
+        <org.attalaya.legacyhelper.view.LegacyHelperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/legacyListItemHeirLaw"
+            android:textAppearance="@style/ListSubtitle"
+            android:text="@string/heir_law"
+            custom:realmField="heirLaw.name"
+            custom:pack="main" />
+
+        <org.attalaya.legacyhelper.view.LegacyHelperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/legacyListItemSpeciesLaw"
+            android:textAppearance="@style/ListSubtitle"
+            android:text="@string/species_law"
+            custom:realmField="speciesLaw.name"
+            custom:pack="ep01" />
+
+    </LinearLayout>
+
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/legacyListItemHeirLaw"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="Heir Law" />
-</LinearLayout>
+        android:id="@+id/editLegacyButton"
+        android:src="@android:drawable/ic_menu_edit"
+        android:tint="@color/secondary_black"
+        android:background="@android:color/transparent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+</RelativeLayout>

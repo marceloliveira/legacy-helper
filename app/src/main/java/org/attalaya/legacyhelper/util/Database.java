@@ -19,7 +19,7 @@ import io.realm.RealmResults;
  */
 public class Database {
 
-    public static final String DATABASE_VERSION = "0.1";
+    public static final String DATABASE_VERSION = "0.3";
 
     public static String populateDataRealm(Context context, String currentVersion) {
         Realm realm = Realm.getInstance(context, "data.realm");
@@ -97,8 +97,8 @@ public class Database {
         for (int j=0;j<mTraits.length;j++) {
             Trait trait = new Trait();
             trait.setId(i);
-            trait.setmName(mTraits[j]);
-            trait.setfName(fTraits[j]);
+            trait.setMaleName(mTraits[j]);
+            trait.setFemaleName(fTraits[j]);
             trait.setChild(false);
             trait.setTeen(false);
             trait.setPack(realm.where(Package.class).equalTo("name", res.getString(R.string.base_package)).findFirst());
@@ -110,8 +110,8 @@ public class Database {
         for (int j=0;j<mTraits.length;j++) {
             Trait trait = new Trait();
             trait.setId(i);
-            trait.setmName(mTraits[j]);
-            trait.setfName(fTraits[j]);
+            trait.setMaleName(mTraits[j]);
+            trait.setFemaleName(fTraits[j]);
             trait.setChild(false);
             trait.setTeen(false);
             trait.setPack(realm.where(Package.class).equalTo("name", res.getString(R.string.gp01_package)).findFirst());
@@ -122,6 +122,7 @@ public class Database {
         for (int c: age) {
             Trait trait = realm.where(Trait.class).equalTo("id", c+1).findFirst();
             trait.setChild(true);
+            trait.setTeen(true);
         }
         age = res.getIntArray(R.array.teen_trait_array);
         for (int c: age) {

@@ -1,4 +1,4 @@
-package org.attalaya.legacyhelper;
+package org.attalaya.legacyhelper.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,21 +10,30 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.attalaya.legacyhelper.R;
+import org.attalaya.legacyhelper.controller.DataController;
+import org.attalaya.legacyhelper.controller.LegacyController;
+
 
 public class CreateSimFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private int simType, simSex, simAge;
     private EditText simName, simSurname;
-    private Spinner simTypeSpinner, simSexSpinner, simAgeSpinner;
+    private Spinner simAgeSpinner;
 
     private static final String ARG_ACTION = "action";
-
+    private static final String ARG_LEGACY_ID = "mLegacyId";
+    private LegacyController controller;
+    private DataController dataController;
     private String mAction;
+    private int mLegacyId;
 
-    public static CreateSimFragment newInstance(String action) {
+
+    public static CreateSimFragment newInstance(String action, int legacyId) {
         CreateSimFragment fragment = new CreateSimFragment();
         Bundle args = new Bundle();
         args.putString(ARG_ACTION, action);
+        args.putInt(ARG_LEGACY_ID, legacyId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,24 +53,28 @@ public class CreateSimFragment extends Fragment implements AdapterView.OnItemSel
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_create_sim, container, false);
-        simTypeSpinner = (Spinner) rootView.findViewById(R.id.simTypeSpinner);
+
+        Spinner simTypeSpinner = (Spinner) rootView.findViewById(R.id.simTypeSpinner);
         final ArrayAdapter<CharSequence> simTypeAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.sim_type_array, android.R.layout.simple_spinner_item);
         simTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         simTypeSpinner.setAdapter(simTypeAdapter);
         simTypeSpinner.setOnItemSelectedListener(this);
-        simSexSpinner = (Spinner) rootView.findViewById(R.id.sexSpinner);
+
+        Spinner simSexSpinner = (Spinner) rootView.findViewById(R.id.sexSpinner);
         final ArrayAdapter<CharSequence> simSexAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.sim_sex_array, android.R.layout.simple_spinner_item);
         simSexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         simSexSpinner.setAdapter(simSexAdapter);
         simSexSpinner.setOnItemSelectedListener(this);
-        simAgeSpinner = (Spinner) rootView.findViewById(R.id.ageSpinner);
+
+        Spinner simAgeSpinner = (Spinner) rootView.findViewById(R.id.ageSpinner);
         final ArrayAdapter<CharSequence> simAgeAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.sim_age_array, android.R.layout.simple_spinner_item);
         simAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         simAgeSpinner.setAdapter(simAgeAdapter);
         simAgeSpinner.setOnItemSelectedListener(this);
+
         /*bloodlineLawSpinner = (Spinner) rootView.findViewById(R.id.bloodlineLawSpinner);
         ArrayAdapter<CharSequence> bloodlineLawAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.bloodline_law_array, android.R.layout.simple_spinner_item);
